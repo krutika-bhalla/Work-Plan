@@ -1,8 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+<style>
+   /* main{
+        padding-top: 40px;
+        margin-top: 30px;
+        /*height: 1500px;
+    }*/
+</style>
+<main>
 
-    <h2 class="display-5" style="text-align: center; padding-top: 20px;">Plan Your Day Here!</h2>
     <div class="row mt-5">
         <div class="col-md-6">
             @if (session()->has('msg'))
@@ -31,7 +38,7 @@
                         </div>
                         <div class="form-group">
 
-                            <input type="submit" class="btn btn-dark">
+                            <button type="submit" class="btn btn-dark">Submit</button>
                         </div>
 
                     </form>
@@ -46,36 +53,38 @@
                     To-Do-List
                 </div>
                 <div class="card-body">
-
-                    <table class="table table-bordered">
-
-                        <tr>
-                            <th>Your Tasks</th>
-                            <th style="width: 2em">Your Action</th>
-                        </tr>
-
-
-
-                        @foreach ($tasks as $task)
-
+                    <div id="myUL">
+                        <table class="table table-bordered">
 
                             <tr>
-                                <th>{{ $task->title }}</th>
-                                <th>
-                                    <form action="{{ route('task.destroy', $task->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
-                                    </form>
-                                </th>
+                                <th>Your Tasks</th>
+                                <th style="width: 2em">Your Action</th>
                             </tr>
-                        @endforeach
 
-                    </table>
 
+
+                            @foreach ($tasks as $task)
+
+
+                                <tr>
+                                    <th>{{ $task->title }}</th>
+                                    <th>
+                                        <form action="{{ route('task.destroy', $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            @endforeach
+
+                        </table>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+</main>
 @endsection
